@@ -1,5 +1,9 @@
 X432R_CUSTOMRENDERER_ENABLED=0
 
+ifneq ($(EMSCRIPTEN),)
+	platform = emscripten
+endif
+
 ifeq ($(platform),)
 	platform = unix
 	ifeq ($(shell uname -a),)
@@ -169,6 +173,10 @@ else ifneq (,$(findstring armv,$(platform)))
 		CXXFLAGS += -mfloat-abi=hard
 	endif
 	CXXFLAGS += -DARM
+
+# emscripten
+else ifeq ($(platform), emscripten)
+	TARGET := $(TARGET_NAME)_libretro_emscripten.bc
 
 # Windows
 else

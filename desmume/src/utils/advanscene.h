@@ -16,6 +16,7 @@
 */
 
 #include <string>
+#include <time.h>
 #include "../types.h"
 
 class EMUFILE;
@@ -59,7 +60,7 @@ public:
 	u32 getCRC32() { return crc32; }
 	char *getSerial() { return serial; }
 	bool isLoaded() { return loaded; }
-	const char* getIdMethod() { 
+	const char* getIdMethod() {
 		if(foundAsSerial && foundAsCrc) return "Serial/CRC";
 		if(foundAsSerial) return "Serial";
 		if(foundAsCrc) return "CRC";

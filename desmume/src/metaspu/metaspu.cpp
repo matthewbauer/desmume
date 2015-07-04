@@ -22,6 +22,7 @@
 #include <queue>
 #include <vector>
 #include <assert.h>
+#include <stdlib.h>
 
 //for pcsx2 method
 #if defined(_MSC_VER) || defined(HAVE_LIBSOUNDTOUCH) || defined(DESMUME_COCOA) || defined(DESMUME_QT)
@@ -96,7 +97,7 @@ public:
 				*buf++ = right;
 			}
 		}
-		
+
 		return done;
 	}
 
@@ -125,7 +126,7 @@ private:
 
 		std::queue<int> statsHistory;
 
-		void enqueue(s16 left, s16 right) 
+		void enqueue(s16 left, s16 right)
 		{
 			buffer.push(left);
 			buffer.push(right);
@@ -156,7 +157,7 @@ private:
 					else if(averageSize > targetLatency) {
 						targetRate = 1.0f + (averageSize-targetLatency)/kAverageSize;
 					} else targetRate = 1.0f;
-				
+
 					//rate = moveValueTowards(rate,targetRate,0.001f);
 					rate = targetRate;
 				}
@@ -168,7 +169,7 @@ private:
 
 		void dequeue(s16& left, s16& right)
 		{
-			left = right = 0; 
+			left = right = 0;
 			addStatistic();
 			if(size==0) { return; }
 			cursor += rate;
@@ -180,7 +181,7 @@ private:
 					size--;
 				}
 			}
-			left = curr[0]; 
+			left = curr[0];
 			right = curr[1];
 		}
 	} adjustobuf;
